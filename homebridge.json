@@ -1,0 +1,48 @@
+{
+    "Homebridge with Config UI X": {
+      "description": "Homebridge, an bridge to HomeKit",
+      "version": "v1.0",
+      "website": "https://homebridge.io",
+      "icon": "https://homebridge.io/website/images/apple-touch-icon.png",
+      "more_info": "Homebridge is a lightweight NodeJS server that emulates the iOS HomeKit API.",
+      "ui":{
+                "slug":"",
+      },
+      "volume_add_support": true,
+      "containers": {
+        "HomebridgewithConfigUIX": {
+            "image": "oznu/docker-homebridge",
+            "tag": "tag of the docker image, if any. latest is used by default.>",
+            "launch_order": "1 or above. If there are multiple containers and they must be started in order, specify here.>",
+            "volumes": {
+    		  "/volume": {
+  				"description": "This is where the config is stored",
+  				"label": "Homebridge Config Storage",
+			  },
+  			},
+            "opts": [
+              ["--net", "host"],
+              ["-v", "/homebridge"]
+            ],
+            "environment": {
+              "HOMEBRIDGE_CONFIG_UI_PORT": {
+  				"description": "Port for the web UI",
+  				"label": "UI port"
+			  },
+              "HOMEBRIDGE_CONFIG_UI": {
+  				"description": "1 for yes, 0 for no.",
+  				"label": "Use UI?"
+			  },
+			  "PUID": {
+  				"description": "User ID for homebridge to be run with.",
+  				"label": "User ID"
+			  },
+			  "PGID": {
+  				"description": "Group ID for homebridge to be run with.",
+  				"label": "Group ID"
+			  },
+            }
+        }
+      }
+    }
+}
